@@ -11,6 +11,7 @@ const Tabs = ({tab, setTab}) => {
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
     navigate("/");
+    navigate(0);
   };
   
   return ( <div>
