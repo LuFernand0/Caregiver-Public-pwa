@@ -1,4 +1,4 @@
-import {useContext} from 'react';
+import {useContext, useRef} from 'react';
 import {BiMenu} from 'react-icons/bi';
 import { authContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -13,13 +13,15 @@ const Tabs = ({tab, setTab}) => {
     navigate("/");
     navigate(0);
   };
+  const menuRef = useRef(null);
+  const toggleMenu = () => menuRef.current.classList.toggle('hidden');
   
   return ( <div>
 
-<span className="lg:hidden">
+<span className="lg:hidden" onClick={toggleMenu}>
   <BiMenu className="w-6 h-6 cursor-pointer"/>
   </span>
-      <div className="hidden lg:flex flex-col p-[30px] bg-white shadow-panelShadow items-center h-max rounded-md">
+      <div className="hidden lg:flex flex-col p-[30px] bg-white shadow-panelShadow items-center h-max rounded-md" ref={menuRef} onClick={toggleMenu}>
           <button
           onClick={() => setTab("vgeral")}
            className={`${

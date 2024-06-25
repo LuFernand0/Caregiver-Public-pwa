@@ -10,11 +10,13 @@ import Appointments from "./Appointments";
 import SobreCuidadores from '../../pages/Cuidadores/SobreCuidadores';
 
 const Dashboard = () => {
-  
+
   const { data, loading, error } = useGetProfile(`${BASE_URL}/cuidadores/perfil/me`);
 
   const [tab, setTab] = useState("vgeral");
+
   
+
   return (
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
@@ -23,7 +25,7 @@ const Dashboard = () => {
 
         {!loading && !error && (
           <div className="grid lg:grid-cols-3 gap-[30px] lg:gap-[50px]">
-            <Tabs tab={tab} setTab={setTab}/>
+            <Tabs tab={tab} setTab={setTab} />
 
             <div className="lg:col-span-2">
               {data.isApproved === "pending" && (
@@ -41,6 +43,7 @@ const Dashboard = () => {
                       clipRule="evenodd"
                     />
                   </svg>
+
                   <span className="sr-only"></span>
                   <div className="ml-3 text-sm font-medium">
                     Para ser aprovado, preencha todo o seu perfil. Faremos uma análise manual do seu perfil em até 3 dias.
