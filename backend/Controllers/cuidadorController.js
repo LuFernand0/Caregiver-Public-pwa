@@ -68,16 +68,9 @@ export const getAllCuidador = async (req, res) => {
                 ],
             }).select("-password");
 
-            console.log(query);
-
-            console.log(cuidadores)
-
-
         } else {
             cuidadores = await Cuidador.find({ isApproved: /approved/i }).select("-password");
         }
-
-        console.log(cuidadores);
 
         res.status(200).json({
             success: true,
