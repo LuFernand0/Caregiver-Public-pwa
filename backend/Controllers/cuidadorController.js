@@ -4,15 +4,15 @@ import Reserva from '../models/ReservaSchema.js';
 export const updateCuidador = async (req, res) => {
     const id = req.params.id;
 
-    try{
+    try {
 
-        const updateCuidador = await Cuidador.findByIdAndUpdate(id, {$set: req.body}, {new:true});
+        const updateCuidador = await Cuidador.findByIdAndUpdate(id, { $set: req.body }, { new: true });
 
-        res.status(200).json({success:true, message: "Atualização feita com sucesso", data:updateCuidador});
+        res.status(200).json({ success: true, message: "Atualização feita com sucesso", data: updateCuidador });
 
-    }catch (err) {
+    } catch (err) {
 
-        res.status(500).json({success:false, message: "Atualização falhou"});
+        res.status(500).json({ success: false, message: "Atualização falhou" });
 
     }
 };
@@ -20,15 +20,15 @@ export const updateCuidador = async (req, res) => {
 export const deleteCuidador = async (req, res) => {
     const id = req.params.id;
 
-    try{
+    try {
 
         await Cuidador.findByDelete(id,);
 
-        res.status(200).json({success:true, message: "Deletado com sucesso"});
+        res.status(200).json({ success: true, message: "Deletado com sucesso" });
 
-    }catch (err) {
+    } catch (err) {
 
-        res.status(500).json({success:false, message: "Falha ao deletar"});
+        res.status(500).json({ success: false, message: "Falha ao deletar" });
 
     }
 };
@@ -36,17 +36,17 @@ export const deleteCuidador = async (req, res) => {
 export const getSingleCuidador = async (req, res) => {
     const id = req.params.id;
 
-    try{
+    try {
 
         const cuidador = await Cuidador.findById(id)
-        .populate("avaliacoes")
-        .select('-password');
+            .populate("avaliacoes")
+            .select('-password');
 
-        res.status(200).json({success:true, message: "Cuidador encontrado", data:cuidador});
+        res.status(200).json({ success: true, message: "Cuidador encontrado", data: cuidador });
 
-    }catch (err) {
+    } catch (err) {
 
-        res.status(404).json({success:false, message: "Cuidador não encontrado"});
+        res.status(404).json({ success: false, message: "Cuidador não encontrado" });
 
     }
 };
@@ -55,57 +55,61 @@ export const getAllCuidador = async (req, res) => {
 
 
 
-    try{
+    try {
 
-        const {query} = req.query
+        const { query } = req.query
         let cuidadores;
 
-        if (query){
+        if (query) {
             cuidadores = await Cuidador.find({
-                isApproved: "approved",
-                $or:[{name:{$regex:query, $options: "i" } },
-                { specialization: { $regex: query, $options: "i"} },
-            ],
+                isApproved: "Approved",
+                $or: [{ name: { $regex: query, $options: "i" } },
+                { specialization: { $regex: query, $options: "i" } },
+                ],
             }).select("-password");
 
             console.log(query);
-            console.log(cuidadores);
-            
-            
-        } else{
+
+            console.log(cuidadores)
+
+
+        } else {
             cuidadores = await Cuidador.find({ isApproved: /approved/i }).select("-password");
         }
+
+        console.log(cuidadores);
 
         res.status(200).json({
             success: true,
             message: "Cuidadores encontrados",
-            data: cuidadores});
+            data: cuidadores
+        });
 
-    }catch (err) {
+    } catch (err) {
 
-        res.status(404).json({success:false, message: "Cuidadores não encontrados"});
+        res.status(404).json({ success: false, message: "Cuidadores não encontrados" });
 
     }
 };
 
-export const getCuidadorProfile = async(req, res) => {
+export const getCuidadorProfile = async (req, res) => {
     const cuidadorId = req.userId
 
 
     try {
         const cuidador = await Cuidador.findById(cuidadorId);
 
-        if(!cuidador){
-            return res.status(404).json({success:false, message: "Cuidador não encontrado"})
+        if (!cuidador) {
+            return res.status(404).json({ success: false, message: "Cuidador não encontrado" })
         }
 
-        const {password, ...rest} = cuidador._doc
-        const consultas = await Reserva.find({cuidador:cuidadorId})
+        const { password, ...rest } = cuidador._doc
+        const consultas = await Reserva.find({ cuidador: cuidadorId })
 
-        res.status(200).json({success:true, message: "Informações do Perfil obtidas", data:{...rest, consultas}});
+        res.status(200).json({ success: true, message: "Informações do Perfil obtidas", data: { ...rest, consultas } });
 
 
     } catch (err) {
-        res.status(500).json({success:false, message: "Algo deu errado"});
+        res.status(500).json({ success: false, message: "Algo deu errado" });
     }
 }
