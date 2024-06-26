@@ -15,9 +15,14 @@ const CuidadoresCard = ({ cuidador }) => {
     } = cuidador;
 
     return (
-        <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-300">
+        <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-300" style={{maxWidth: "13rem"}}>
             <div className="relative">
-                <img src={photo} alt="Imagem do cuidador" className="w-full h-36 object-fill"/>
+                <img
+                 src={photo}
+                 alt="Imagem do cuidador"
+                 className="w-full h-48 object-cover"
+                 style={{ maxWidth: "100%", height: "auto", objectFit: "cover" }}
+                 />
                 <div className="absolute top-2 right-2 bg-white bg-opacity-75 rounded-full px-3 py-1">
                     <span className="text-lg font-semibold text-headingColor">{`R$ ${ticketPrice}`}</span>
                 </div>

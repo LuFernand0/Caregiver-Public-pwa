@@ -55,8 +55,8 @@ const Dashboard = () => {
                 {tab === "vgeral" && (
                   <div>
                     <div className="flex items-center gap-4 mb-10">
-                      <figure className="max-w-[200px] max-h-[200px] overflow-hidden">
-                        <img src={data?.photo} alt="" className="w-full h-full object-cover" />
+                      <figure className="max-w-[230px] max-h-[230px] overflow-hidden">
+                        <img src={data?.photo} alt="" className="w-full h-full object-fill" />
                       </figure>
 
                       <div>

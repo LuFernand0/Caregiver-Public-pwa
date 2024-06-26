@@ -67,14 +67,19 @@ export const getAllCuidador = async (req, res) => {
                 { specialization: { $regex: query, $options: "i"} },
             ],
             }).select("-password");
+
+            console.log(query);
+            console.log(cuidadores);
+            
+            
         } else{
             cuidadores = await Cuidador.find({ isApproved: /approved/i }).select("-password");
         }
 
         res.status(200).json({
-            success:true,
+            success: true,
             message: "Cuidadores encontrados",
-            data:cuidadores});
+            data: cuidadores});
 
     }catch (err) {
 

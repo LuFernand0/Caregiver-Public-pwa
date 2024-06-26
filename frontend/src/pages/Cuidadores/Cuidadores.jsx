@@ -33,7 +33,7 @@ const Cuidadores = () => {
 
 
   const {
-    data:cuidadores,
+    data: cuidadores,
     loading,
     error
   } = useFetchData(`${BASE_URL}/cuidadores?query=${debounceQuery}`);
@@ -61,12 +61,13 @@ const Cuidadores = () => {
 
       <section>
         <div className="container">
+          {console.log(cuidadores)}
 
         {loading && <Loader/>}
         {error && <Error/>}
                   
         { !loading && !error && (
-           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 flex justify-items-center">
           {cuidadores.map(cuidador => (
             <CuidadoresCard key={cuidador._id} cuidador={cuidador}/>
           ))}

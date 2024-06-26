@@ -1,9 +1,9 @@
 import useFetchData from "../../hooks/useFetchData";
 import { BASE_URL } from "../../config";
 
-import CuidadoresCardSmall from '../../components/Cuidadores/CuidadoresCardSmall';
 import Loading from "../../components/Loader/Loading";
 import Error from "../../components/Error/Error";
+import CuidadoresCard from "../../components/Cuidadores/CuidadoresCardSmall";
 
 const MyBookings = () => {
 
@@ -20,9 +20,9 @@ const MyBookings = () => {
       {error && !loading && <Error errMessage={error.message} />}
 
       {!loading && !error && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 flex justify-items-center">
           {appointments.map(cuidador => (
-            <CuidadoresCardSmall cuidador={cuidador} key={cuidador._id}/>
+            <CuidadoresCard cuidador={cuidador} key={cuidador._id}/>
           ))}
         </div>
       )}
